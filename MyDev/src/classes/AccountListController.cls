@@ -1,7 +1,7 @@
 public class AccountListController {
 
 
-     
+     public string accountList;
     public List<Account> account=[select id,name,phone,Owner.Email,Active__c,Theatre__c from Account];
   
     
