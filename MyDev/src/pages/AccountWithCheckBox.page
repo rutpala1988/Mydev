@@ -1,0 +1,27 @@
+<apex:page controller="ControllerWithCheckBox" showHeader="true" sidebar="true">
+<apex:form >
+<apex:pageBlock title="Select Accounts">
+<apex:pageBlockTable value="{!Accounts}" var="list">
+<apex:column headerValue="select">
+ <apex:inputCheckbox value="{!list.check}"/>
+
+</apex:column>
+<apex:column value="{!list.acctname}" headerValue="Account Name"/>
+<apex:column value="{!list.phone}" headerValue="Phone"/>
+
+</Apex:pageBlockTable>
+<apex:commandButton action="{!getSelectedValues}" Value="Submit"/>
+<apex:pageBlockSection title="Selected Accounts">
+
+<apex:pageBlockTable value="{!SelectedAccounts}" var="acct" rendered="{!disp}">
+<apex:column value="{!acct.Name}"/>
+<apex:column value="{!acct.phone}"/>
+
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+ 
+</apex:page>

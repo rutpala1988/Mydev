@@ -1,0 +1,10 @@
+<apex:page controller="GoogleTranslate" >
+<apex:form >
+<apex:inputText value="{!text}"/>
+
+<apex:commandbutton action="{!CallGoogleTranslteApi}" value="Translate"  reRender="out"/>
+
+<apex:outputText value="{!output}" id="out"/> 
+</apex:form>
+  
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page setup="true" showHeader="true" sidebar="true" Standardcontroller="Account" extensions="RecordTypeSelection" >
+<apex:form >
+<apex:pageBlock title="Select Account Record Type"  >
+<apex:outputLabel >Record Type of new record </apex:outputLabel>&nbsp;&nbsp;
+<apex:selectList value="{!recordtype}" multiselect="false" size="1" required="true">
+<apex:selectOptions value="{!options}"/>
+</apex:selectList>
+
+<apex:pageBlockButtons >
+ <apex:commandButton action="{!nextStep}" value="Continue"/>
+ <apex:commandButton action="{!cancel}"   value="cancel"/>
+</apex:pageBlockButtons>
+
+
+
+
+
+
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

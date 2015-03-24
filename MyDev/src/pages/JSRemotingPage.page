@@ -1,0 +1,5 @@
+<apex:page controller="JSRemoting">
+ <apex:form >
+ <apex:commandButton value="Show" action="{!startJS}"/>
+ </apex:form>
+</apex:page>

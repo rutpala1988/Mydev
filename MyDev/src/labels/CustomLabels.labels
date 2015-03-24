@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AccountsList</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>AccountsList</shortDescription>
+        <value>AccountList</value>
+    </labels>
+    <labels>
+        <fullName>Convert_to_Opportunity</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Convert to Opportunity</shortDescription>
+        <value>Convert to Opportunity</value>
+    </labels>
+    <labels>
+        <fullName>First_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>First Name</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>ListView</fullName>
+        <categories>ListView</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ListView</shortDescription>
+        <value>View Name</value>
+    </labels>
+</CustomLabels>

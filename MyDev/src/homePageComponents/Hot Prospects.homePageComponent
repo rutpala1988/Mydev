@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&amp;lt;html&amp;gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&amp;nbsp; &amp;lt;body&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;lt;ul&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&amp;lt;li&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;lt;i&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; hot&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;lt;/i&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;lt;/li&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp;&amp;lt;/ul&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&amp;lt;/body&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;lt;/html&amp;gt;&lt;/div&gt;&lt;/div&gt;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>wide</width>
+</HomePageComponent>

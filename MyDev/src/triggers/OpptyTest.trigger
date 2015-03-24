@@ -1,0 +1,1 @@
+trigger OpptyTest on Opportunity (after insert) { }

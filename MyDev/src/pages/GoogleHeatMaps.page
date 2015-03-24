@@ -1,0 +1,122 @@
+<apex:page Controller="HeatMap1" tabStyle="Case" sidebar="true" showHeader="true">
+<center>
+<!--<apex:image url="{!$Resource.FreshDiet}" width="200" height="70"/>-->
+</center>
+<apex:pageBlock title="Equipments And their Location">
+<script src="https://maps.google.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript"> 
+        <!--var heatmapData=new Array();-->
+        var i=0;                  
+        var geocoder;
+        var map;
+        var infowindow = new google.maps.InfoWindow();
+        var places = [];
+        var title_content = new Array();                    
+        var popup_content = new Array();                    
+        var address = new Array();
+        var address1;
+        var address_position = 0;                    
+        var timeout = 600;
+        function initialize(){
+            geocoder = new google.maps.Geocoder();
+            var uk= new google.maps.LatLng(51, 30);
+           var myOptions = {
+                center:uk,
+                 zoom: 8,
+                 mapTypeId: google.maps.MapTypeId.SATELLITE,
+                 
+                   }
+                   
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+            <apex:repeat value="{!ListAccounts}" var="loc" id="addressesId">
+                <!--address1="{!loc.Account.BillingCity}, " + "{!loc.Account.BillingPostalCode}, " + "{!loc.Account.BillingCountry}";-->
+                title_content.push("Name: "+"{!loc.Name}"+" \nClick for more Detail");                 
+                
+                popup_content.push("<b>Account Name: {!loc.Name}"
+                +"<br/>Street: {!loc.BillingStreet}"
+                +"<br/>City: {!loc.BillingCity}<br/>Postal Code: {!loc.BillingPostalCode}"
+                +"<br/>Country: {!loc.BillingCountry }</b>"); 
+                
+                  address[i]="{!loc.BillingCity}, " + "{!loc.BillingPostalCode}, " + "{!loc.BillingCountry}";
+                 
+                 geocoder.geocode({ 'address': address[address_position]}, function(results, status){
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    console.log('Lat'+results[0].geometry.location.lat()+'Long'+results[0].geometry.location.lng());
+                     
+                    }
+                 });
+                 i++;
+                 
+                 address_position++;
+                <!--addmarker(address_position);-->
+                </apex:repeat>  
+                
+               var heatmapData=[ new google.maps.LatLng(53.5287683,-2.1858932000000095) ,
+                                 new google.maps.LatLng(53.5287683,-2.1858932000000095)  ,
+                                 new google.maps.LatLng(53.7985972,-1.5472800000000007 ) ,
+                                 new google.maps.LatLng(51.49466349999999,-0.27603799999997136) , 
+                                 new google.maps.LatLng(51.49466349999999,-0.27603799999997136), 
+                                 new google.maps.LatLng(53.4774819,-2.241879400000016) , 
+                                 new google.maps.LatLng(51.4578847,-0.9800301000000218), 
+                                 new google.maps.LatLng(51.5132084,-0.08711790000006658),
+                                 new google.maps.LatLng(51.4973118, -0.1273741999999629),
+                                 new google.maps.LatLng(51.4578847,-0.9800301000000218),
+                                 new google.maps.LatLng(51.5132084,-0.08711790000006658),
+                                 
+                         ];
+                                  
+
+             var pointArray = new google.maps.MVCArray(heatmapData);  
+           
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData
+              });
+            heatmap.setMap(map);
+          
+            
+            
+            
+            
+        }        
+         
+         
+   
+        
+         
+    </script>  
+    <apex:pageMessages />
+    <div id="map" class="roundCornerCss"></div>   
+    <script>
+    initialize()
+    </script>
+<style>
+
+h2{float:left;width:375px;padding:10px 0px 5px 30px;margin: 0px 0px 0px 0px;font-weight:bold;} 
+#map {
+  font-family: Arial;
+  font-size:12px;
+  line-height:normal !important;
+  height:650px;
+  background:transparent;
+}
+.apexp{
+margin:10px;
+}
+.individualPalette .caseBlock .secondaryPalette {
+border-color:#86b821
+}
+.individualPalette .caseBlock .tertiaryPalette{
+border-color:#86b821;
+background-color:#86b821;
+}
+
+</style>
+
+  
+
+
+ 
+ </apex:pageblock>
+</apex:page>

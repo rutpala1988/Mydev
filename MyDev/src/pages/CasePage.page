@@ -1,0 +1,13 @@
+<apex:page standardController="case" extensions="CaseExtension">
+<apex:form >
+Case Owner<apex:inputField value="{!case.ownerid}"/><br/>
+Case Subject <apex:inputField value="{!case.subject}"/><br/>
+Case Prioriry <apex:inputField value="{!case.Priority}"/><br/>
+Case Reason  <apex:inputField value="{!case.Reason}"/><br/>
+
+<apex:commandButton value="Save" action="{!save}"/>
+
+</apex:form>
+
+  
+</apex:page>

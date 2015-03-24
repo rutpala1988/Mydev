@@ -1,0 +1,7 @@
+Your Deal Registration with DR #{!Lead.Deal_Registration_Number__c} has been Approved .<br/><br/>
+
+The final Deal value : {!Lead.Expected_Value__c}<br/><br/><br/>
+
+
+Thanks<br/>
+Salesforce.com Team

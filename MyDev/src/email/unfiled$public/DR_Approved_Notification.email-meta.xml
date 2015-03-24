@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>DR Approved Notification</name>
+    <style>none</style>
+    <subject>Deal Registration {!Lead.Deal_Registration_Number__c} has been Approved</subject>
+    <textOnly>Your Deal Registration with DR #{!Lead.Deal_Registration_Number__c} has been Approved .
+
+The final Deal value : {!Lead.Expected_Value__c}
+
+
+Thanks Salesforce.com Team</textOnly>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,0 +1,109 @@
+<apex:page showHeader="false" sidebar="false" standardController="Opportunity" extensions="ProductPicker" cache="false" action="{!addPricebook}" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <style>
+        .padded {
+            padding:10px;
+        }
+    
+    </style>
+    
+    <apex:form >
+    <apex:actionFunction name="getProducts" action="{!getProducts}" rerender="results" status="myStatus"/>
+        <apex:outputPanel id="Search">
+            <apex:pageBlock id="searchWrapper">  
+                <h1>Find Products</h1><br/>
+                <apex:outputText styleClass="padded" value="Keyword"/><apex:inputText value="{!keyword}" onkeyup="startSearch();" />
+                <apex:commandButton value="Search" styleClass="searchbtn" action="{!getProducts}" id="searchbtn"  rerender="results"/>
+                <apex:commandButton value="Clear Search" action="{!clearSearch}" id="clearSearch"  rerender="results,Search"/><br/> 
+                <p>
+                <apex:outputText styleClass="padded" value="Product Family"/>
+                <apex:selectList value="{!family}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!ProductFamily}"/>  
+                </apex:selectList>
+                </p>
+            </apex:pageBlock> 
+        </apex:outputPanel>
+        <apex:inputHidden id="hostName" value="{!hostname}"/> 
+        <apex:outputPanel id="results">
+            
+            <apex:pageBlock > 
+            <h1>Results</h1>
+            
+                <apex:pageBlockTable value="{!pwList}" var="p">
+                <!--  
+                    <apex:column >
+                        <apex:inputCheckbox value="{!p.selected}" id="checkedone">
+                        </apex:inputCheckbox>
+                    </apex:column> 
+                -->
+                    <apex:column value="{!p.product.name}"/>
+                    <apex:column value="{!p.product.family}"/> 
+                    <apex:column value="{!p.product.description}"/>
+                    <apex:column headerValue="Product Bundle" >
+                        <apex:commandLink value="{!p.bundle}" onclick="OpenDetails('{!p.bundleId}')"/>
+                    </apex:column> 
+                    <apex:column value="{!p.pe.unitPrice}"/>                    
+                    <apex:column headerValue="Quantity">
+                        <apex:inputText value="{!p.quantity}"/>
+                    </apex:column> 
+                    <apex:column headerValue="Sales Price">
+                        <apex:inputText value="{!p.salesPrice}"/>
+                    </apex:column> 
+                    <apex:column headerValue="Product Detail"> 
+                        <apex:commandLink value="View Details" onclick="OpenDetails('{!p.product.id}')"/>
+                    </apex:column>          
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        <apex:commandButton value="Add To Order"  action="{!GetSelectedProducts}" rerender="OrderLines"/>
+        <apex:commandButton value="Clear Order"  action="{!ClearSelectedProducts}" rerender="OrderLines"/>
+        <apex:outputPanel id="OrderLines">   
+            <apex:pageBlock >
+            <h1>Order Lines</h1>
+                <apex:pageBlockTable value="{!SelectedList}" var="p">
+                    <apex:column value="{!p.product.name}"/>
+                    <apex:column value="{!p.product.family}"/>
+                    <apex:column value="{!p.product.description}"/>
+                    <apex:column headerValue="Product Bundle" >
+                        <apex:commandLink value="{!p.bundle}" onclick="OpenDetails('{!p.bundleId}')"/>
+                    </apex:column>
+                    <apex:column headerValue="Quantity" value="{!p.quantity}"/>
+                    <apex:column headerValue="Sales Price" value="{!p.salesPrice}"/>
+                    <apex:column >
+                        <apex:commandButton value="Delete" action="{!DeleteSelectedItem}" rerender="OrderLines">
+                            <apex:param name="deleteId" assignto="{!deleteId}" value="{!p.product.id}"/>
+                        </apex:commandButton>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:outputPanel>     
+        <apex:commandButton value="Save Products" action="{!SaveProducts}"/>         
+    </apex:form>
+    
+        <script>
+        function startSearch() {
+            getProducts();
+        }
+        
+        function OpenDetails(id) {
+            var host = $('[id*="hostName"]').val();
+            host = host.split('/')[2];
+            mywindow = window.open('https://' + host + '/' + id,'Product Detail','height=600,width=800,scrollbars=yes,location=yes');
+        }
+        
+      function noenter() 
+      {
+         if (window.event && window.event.keyCode == 13)
+         {
+            var ele=document.getElementById('{!$Component.theForm.searchbtn}');
+            ele.click();
+            return false;
+         }
+         else
+         {
+            return true;
+         }
+      }
+    </script>
+</apex:page>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;div id=&quot;google_translate_element&quot;&gt;&lt;/div&gt;&lt;script type=&quot;text/javascript&quot;&gt;function googleTranslateElementInit() {  new google.translate.TranslateElement({pageLanguage: &apos;en&apos;, layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, multilanguagePage: true, gaTrack: true, gaId: &apos;UA-33877561-1&apos;}, &apos;google_translate_element&apos;);}&lt;/script&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&quot;&gt;&lt;/script&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;</body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>narrow</width>
+</HomePageComponent>

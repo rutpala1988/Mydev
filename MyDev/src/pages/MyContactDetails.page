@@ -1,0 +1,9 @@
+<apex:page Controller="MyContact">
+<apex:pageBlock title="Contact Details">
+<apex:form >
+<apex:outputLabel value="First Name"/> <apex:inputtext value="{!FirstName}"/>
+<apex:commandButton value="Save" action="{!save}"/>
+</apex:form>
+</apex:pageBlock>
+<apex:detail relatedList="false"/>
+ </apex:page>

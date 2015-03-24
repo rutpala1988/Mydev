@@ -1,0 +1,4 @@
+<apex:page controller="CustomSettingRead" action="{!doAction}">
+{!text}
+  
+</apex:page>

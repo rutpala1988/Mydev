@@ -1,0 +1,13 @@
+<apex:page standardController="Lead">
+
+<apex:pageBlock rendered="{!$ObjectType.Lead.accessible}">
+<p> This message is displayed because you have access to lead object.
+</p>
+</apex:pageBlock>
+<apex:pageBlock rendered="NOT{!$ObjectType.Lead.accessible}">
+<p>
+Tis message is displayed becasue you don't have access to the lead object
+</p>
+
+</apex:pageBlock>  
+</apex:page>

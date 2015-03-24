@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social Translator</fullName>
+    <apiAccessLevel>Restricted</apiAccessLevel>
+    <namespacePrefix>rich</namespacePrefix>
+    <types>
+        <members>Translate_Controller</members>
+        <members>Translate_Controller_Test</members>
+        <members>Translate_PostInstallClass</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>translate</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>Social_Translate</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Chatter_Translate</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Social_Translate</members>
+        <members>Social_Translate/social_translate_logo.png</members>
+        <name>Document</name>
+    </types>
+    <types>
+        <members>Translate</members>
+        <name>HomePageComponent</name>
+    </types>
+    <types>
+        <members>Social Translate</members>
+        <name>HomePageLayout</name>
+    </types>
+    <types>
+        <members>loading_gif</members>
+        <name>StaticResource</name>
+    </types>
+    <version>31.0</version>
+</Package>

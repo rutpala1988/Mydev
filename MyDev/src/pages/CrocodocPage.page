@@ -1,0 +1,3 @@
+<apex:page controller="Crodoc" action="{!getDoc}">
+ {!resp}
+</apex:page>

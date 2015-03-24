@@ -1,0 +1,141 @@
+<apex:page showHeader="false" sidebar="false">
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+var date1 = '{!TODAY() + 7}';
+var date2 = '{!TODAY() + 15}';
+var date3 = '{!TODAY() + 24}';
+
+$(document).ready(function(){
+                
+                /* loginbtn */
+                
+                $("#loginBtn").click(function(){
+                                
+                                $(".submitBtn").toggleClass("submitBtnActive");
+
+                });
+                
+                var imageWidth=$(".sliderWindow").width();
+                var totalImages=$(".sliderImages img").size();
+                var sliderWidth=imageWidth*totalImages;
+//alert(sliderWidth)
+                
+                $(".sliderImages").css({'width':sliderWidth});
+                                
+
+                rotate = function(){         
+                                var triggerID = $active.attr("rel") - 1; 
+                                var image_reelPosition = triggerID * imageWidth; 
+                                $(".paging a").removeClass('active'); 
+                                $active.addClass('active'); 
+                                
+                                
+                                $(".sliderImages").animate({ 
+                                                left: -image_reelPosition
+                                }, 400 );
+                                
+                }; 
+                
+
+                rotateSwitch = function(){                           
+                                play = setInterval(function(){ 
+                                                $active = $('.paging a.active').next();
+                                                if ( $active.length === 0) { 
+                                                                $active = $('.paging a:first');
+                                                }
+                                                rotate(); 
+                                }, 5000); 
+                };             
+                rotateSwitch(); 
+                
+                $(".image_reel a").hover(function() {
+                                clearInterval(play); 
+                }, function() {
+                                rotateSwitch(); 
+                });           
+                
+
+                $(".paging a").click(function() {  
+                                $active = $(this); 
+                                //Reset Timer
+                                clearInterval(play); 
+                                rotate(); 
+                                rotateSwitch(); 
+                                return false; 
+                });           
+                
+});
+</script>
+
+
+
+<!-- ***************start ************** -->
+
+<div class="wrapper"> 
+ 
+  <!--slider start-->
+  
+  <div class="slideDiv">
+                
+    <div class="sliderWindow">
+      <div class="sliderImages">
+      <img src="{!$Resource.img1}"  width="804px" height="300"  />
+      <img src="{!$Resource.img2}"  width="804px" height="300" />
+      <img src="{!$Resource.img3}"   width="804px" height="300" />
+      </div>
+    </div>
+    <div class="paging"> 
+  <a href="#" rel="1"></a> 
+  <a href="#" rel="2"></a> 
+  <a href="#" rel="3"></a> 
+   </div>
+
+  </div>
+  <!--header end--> 
+ 
+  
+</div>
+
+
+
+<!--**************end *****************-->
+<style>
+  .wrapper{
+width:804px;
+margin:0 auto;
+                
+}
+
+
+.sliderDiv{
+
+float:left;
+position:relative
+/*overflow:hidden;*/
+
+}
+.sliderWindow{
+
+height:300px;
+width:804px;   
+background-color:#fff;
+margin:0px;
+overflow:hidden;
+position:relative;
+/*overflow:hidden;*/
+
+}
+.sliderImages{
+                position:absolute;
+                top:0;
+                left:0px;
+                background-color: #1A8AC7;
+}
+
+.sliderImages img{
+float:left;             
+}
+</style>
+</apex:page>

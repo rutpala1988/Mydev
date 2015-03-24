@@ -1,0 +1,9 @@
+<apex:page controller="MyFirstTestClass">
+
+<apex:form >
+
+  <apex:commandButton action="{!saveRecord}" value="Save"/>
+</apex:form>
+
+  
+</apex:page>

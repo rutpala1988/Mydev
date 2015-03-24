@@ -1,0 +1,42 @@
+<apex:page standardController="Account" sidebar="false">
+<script type="text/javascript" src="http://maps.google.com/maps?file=api">
+</script>
+<script type="text/javascript">
+funtion initialize()
+{
+var geocoder;
+ var map;
+var mapOptions= {
+zoom:8,
+center: new google.maps.LatLng(-34.397, 150.644),
+mapTypeId :new google.maps.MapTypeId.ROADMAP
+    };
+    
+    map=new google.maps.Map(document.getElementById("my_canvas"),mapOptions); 
+}  
+
+function codeAddress() {
+    var address="
+{!Account.BillingStreet},{!Account.BillingCity},{!Account.BillingState}";
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+</script>
+<apex:form >
+<div id="my_canvas" style="width=100%,height=800px"></div>
+<script>
+initialize();
+</script>
+<apex:commandButton onclick="codeAddress()" value="Display"/>
+
+  </apex:form>
+</apex:page>

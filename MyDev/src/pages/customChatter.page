@@ -1,0 +1,7 @@
+<apex:page controller="customChatter">
+    <apex:form >
+        <apex:inputText value="{!cPost}"/>
+        <apex:inputText value="{!cComment}"/>
+        <apex:commandButton value="Share" action="{!share}"/>
+    </apex:form>  
+</apex:page>

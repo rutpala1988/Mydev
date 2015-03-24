@@ -1,0 +1,23 @@
+<apex:page controller="Translator">
+<script type="text/javascript">
+
+function translate()
+{
+
+
+
+}
+
+
+</script>
+<apex:form >
+
+<apex:inputText value="{!inputString}"/>
+
+<apex:commandButton onclick="translate()"/>
+
+<apex:outputText > Translated Text is {!outputString} </apex:outputText>
+
+</apex:form>
+  
+</apex:page>

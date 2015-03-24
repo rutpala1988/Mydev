@@ -1,0 +1,35 @@
+<apex:page Controller="MyContacts">
+
+<script type="text/javascript">
+function validate()
+{
+var myform=component.getElementById('test');
+var fname=myform.getElementById('fname').value;
+var lname=myform.getElementById('lname').value;
+var pno=myform.getElementById('pno').value;
+
+if(fname.equals(""))
+{
+window.alert('First Name is empty');
+}
+if(lname.equals(""))
+{
+window.alert('Last Name is empty');
+}
+if(pno.equals(""))
+
+{
+window.alert('Phone Number is empty');
+}
+}
+</script>
+<apex:form id="test">
+<apex:pageBlock >
+<apex:outputLabel >First Name</apex:outputLabel><apex:inputText id="fname" value="{!FirstName1}"/>
+<apex:outputLabel >Last Name</apex:outputLabel><apex:inputtext id="lname" value="{!LastName1}" />
+<apex:outputLabel >Phone number</apex:outputLabel><apex:inputText id="pno" value="{!Phone1}"/>
+</apex:pageBlock>
+
+<apex:commandButton value="save contact" onclick="validate();"/>
+</apex:form>
+</apex:page>

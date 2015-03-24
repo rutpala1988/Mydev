@@ -1,0 +1,18 @@
+<apex:page controller="My_Contacts">
+
+<apex:pageBlock >
+<apex:form >
+This page returns Contacts and you can select Contacts on which you can peform actions
+<apex:DataTable value="{!contacts}" var="con" styleClass="tableClass">
+<apex:column >
+<apex:facet name="header">Name </apex:facet>
+{!con.FirstName} &nbsp;{!con.LastName}</apex:column>
+<apex:column >
+<apex:facet name="header"> Select</apex:facet>
+<apex:inputCheckbox id="delete" title="delete"  value="{!myCheckBox}"/>
+</apex:column>
+</apex:DataTable>
+<apex:commandButton value="deleteContact" action="{!deleteContact}"/>
+</apex:form>
+ </apex:pageBlock>
+</apex:page>

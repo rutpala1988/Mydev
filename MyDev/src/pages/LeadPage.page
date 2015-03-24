@@ -1,0 +1,18 @@
+<apex:page standardcontroller="Lead" extensions="LeadExtension">
+ <apex:form >
+ Lead Name<br/><apex:inputText value="{!lName}"/><br/>
+  
+  <table>
+   <tr><td>Lead Status<apex:inputField value="{!Lead.status}"/></td></tr>
+   </table>
+   
+ Lead Email<br/> <apex:inputText value="{!lEmail}"/><br/>
+ Lead Phone <br/><apex:inputText value="{!lPhone}"/><br/><br/>
+ <apex:param value="{!lName}" id="lName" assignTo="{!lName}"/>
+ <apex:param value="{!Lead.status}" id="lStatus" assignTo="{!lStatus}"/>
+ <apex:param value="{!lEmail}" id="lEmail" assignTo="{!lEmail}"/>
+ <apex:param value="{!lPhone}" id="lPhone" assignTo="{!lPhone}"/>
+ 
+ <apex:commandButton value="next" action="{!next}"/>
+ </apex:form>
+</apex:page>

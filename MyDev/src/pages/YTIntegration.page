@@ -1,0 +1,72 @@
+<apex:page standardController="Lead" extensions="YTIntegrationTest" action="{!fetchData}">
+   <style>
+  .description{
+        color:#666;
+        
+  }
+  
+  .viewCount{
+      font-size:11px;
+        color:#666;
+  }
+  a{
+      text-decoration:none;
+      color:#666;
+  }
+  strong{
+  cursor:pointer !important;
+  color:#438BC5 !important;  
+  }
+  strong:hover{
+  text-decoration:underline !important;
+  }
+  img{
+  cursor:pointer !important;
+  }
+  .author{
+      padding-right:5px;
+      float:left;
+      color:#666;
+  }
+  .vCount{
+      padding-right:5px;
+      float:left;
+      color:#666;
+  }
+  .by{
+      padding-right:5px;
+      float:left;
+      color:#666;
+  }
+  </style>
+  <table width="500" cellpadding="2" cellspacing="2">
+   
+  <apex:repeat value="{!dataSetOne }" var="dis" >
+      <tr>
+        <td width="120" rowspan="3"><img src="{!dis.f3}" alt="thumbnail" data-thumb="{!dis.f3}" width="120"/></td>
+        <td><a href="http://www.youtube.com/watch?v={!dis.f7}" target="_blank"><strong>{!dis.f1}</strong></a></td>
+      </tr>
+      <tr>
+        <td class="description" ><div class="by"> by </div> <div class="author"><a href="http://www.youtube.com/user/{!dis.f5}" target="_blank"><apex:outputText >{!dis.f5}</apex:outputText></a> - </div>
+            <div class="author"><apex:outputText >{!dis.f6}</apex:outputText> - </div>   <div class="vCount"><apex:outputText >{!dis.f4} Views</apex:outputText></div>     
+        </td>
+        
+      </tr>
+      <tr>
+        <td class="description" ><apex:outputText >{!dis.f2}</apex:outputText></td>
+      </tr>
+      <tr>
+        <!-- <td class="viewCount" >
+          <apex:outputText >{!dis.f4} Views</apex:outputText>
+        </td>
+        
+        -->
+      </tr>    
+  </apex:repeat> 
+  
+  
+  
+  </table>
+  
+ 
+</apex:page>

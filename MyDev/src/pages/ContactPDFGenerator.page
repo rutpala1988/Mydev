@@ -1,0 +1,34 @@
+<apex:page standardController="contact" extensions="ContactExtension"  rendered="true">
+
+
+<apex:form id="form">
+<apex:pageBlock >
+<apex:pageBlockSection >
+<apex:panelGrid >
+<apex:outputLabel ><b>Last Name</b></apex:outputLabel>
+<apex:outputField value="{!contact.LastName}"/>
+
+</apex:panelGrid>
+<apex:panelGrid >
+<apex:outputLabel ><b>Account Name</b></apex:outputLabel>
+<apex:outputField value="{!contact.Account.Name}"/>
+</apex:panelGrid>
+
+
+<apex:panelGrid >
+<apex:outputLabel ><b> Contact Title</b></apex:outputLabel>
+ <apex:outputField value="{!contact.Title}"/><br/>
+
+</apex:panelGrid>
+
+<apex:panelGrid >
+<apex:outputLabel ><b>Contact Phone </b></apex:outputLabel>
+<apex:outputField value="{!contact.Phone}"/><br/>
+</apex:panelGrid>
+<!-- <apex:param value="{!url}" id="Id"/> -->
+<apex:commandButton value="Generate PDF" action="{!pdfgenerate}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+ 
+</apex:page>

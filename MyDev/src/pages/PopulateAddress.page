@@ -1,0 +1,17 @@
+<apex:page standardController="Account" tabStyle="Account" extensions="PopulateBillingInfo">
+
+<apex:form >
+<apex:pageBlock title="Account Details">
+<apex:pageBlockSection >
+<apex:inputField value="{!act.parentid}"/>
+
+
+<apex:inputText value="{!act.BillingCountry}" rendered="true"/>
+
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+
+</apex:form>
+  
+</apex:page>

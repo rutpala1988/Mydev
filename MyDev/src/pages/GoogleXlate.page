@@ -1,0 +1,68 @@
+<!--
+
+// Copyright 2013, Doug Merrett - Sales Engineering, Salesforce.com Inc.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// - Redistributions of source code must retain the above copyright notice,
+//   this list of conditions and the following disclaimer. 
+// - Redistributions in binary form must reproduce the above copyright notice, 
+//   this list of conditions and the following disclaimer in the documentation
+//   and/or other materials provided with the distribution.
+// - Neither the name of the salesforce.com nor the names of its contributors
+//   may be used to endorse or promote products derived from this software
+//   without specific prior written permission. 
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<apex:page controller="GoogleXlateCont">
+    <apex:sectionHeader title="Translate Text from one language to another" subtitle="Google Translate API Demo"/>
+    <apex:messages />
+
+    <apex:form rendered="{!bValidKey}">
+        <apex:pageBlock title="Enter details and press Translate" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!xlate}" value="Translate"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection showHeader="false" columns="2">
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="From" for="From"/>
+                    <apex:selectList value="{!sFromLang}" multiselect="false" size="1" id="From">
+                        <apex:selectOptions value="{!Languages}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Text" for="FromText"/>
+                    <apex:inputTextArea value="{!sFromText}" cols="80" rows="4" id="FromText"/>
+                </apex:pageBlockSectionItem>                
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="To" for="To"/>
+                    <apex:selectList value="{!sToLang}" multiselect="false" size="1" id="To">
+                        <apex:selectOptions value="{!Languages}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Text" for="ToText"/>
+                    <apex:outputText value="{!sToText}" id="ToText" escape="false"/>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

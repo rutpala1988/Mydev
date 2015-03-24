@@ -1,0 +1,14 @@
+<apex:page standardController="Account"  renderAs="pdf">
+  <h1>
+  This is my new page
+  </h1>
+<br/><br/>
+<apex:pageBlock >
+  <h2>
+  Hello &nbsp;&nbsp;{!$User.FirstName}&nbsp;{!$User.LastName}
+  </h2>
+  <br/><br/>
+  you are viewing {!account.name} account
+  </apex:pageBlock>
+  <apex:detail subject="{!account.ownerId}" relatedList="false" title="false"/>
+</apex:page>

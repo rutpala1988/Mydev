@@ -1,0 +1,196 @@
+<apex:page cache="false" standardController="Case" extensions="NextCase" showHeader="false" sidebar="false" >
+ <style>
+        .myInfo {
+            text-align: center;
+            width:100%;
+        }
+        .myInfoWrapper td{
+            width: 100%;
+        }
+        
+        .myInfoWrapper table{
+            background-color: #d8dfea;
+            
+        }
+        .myText {
+            color:#DE2121;
+        }
+        .myDiv td {
+            text-align: center;
+        }
+        .myDiv {
+            text-align:center;
+            color:#DE2121;
+            
+        }
+        .myDiv table {
+            width: 142px;
+            margin: 0px auto;
+        }
+        .myInfo {
+            font-weight:bold;
+        }
+        .fbookNumber{
+            float:right;
+            color: #3b5998;
+            font-weight: bold;
+            background-color: #d8dfea;
+            -webkit-border-radius: 2px;
+            padding: 0 4px;
+            position: relative;
+        }
+    </style>
+    
+    <apex:includeScript value="/support/console/28.0/integration.js"/>
+    <script>
+         sforce.console.setTabTitle('Loading...');
+    </script>  
+                                 
+    <!--<SCRIPT LANGUAGE="JavaScript" SRC="http://code.jquery.com/jquery.min.js"></script>
+     <SCRIPT LANGUAGE="JavaScript" SRC="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script> -->
+    <apex:includeScript id="Jquery" VALUE="{!$Resource.trevorsJquery}"/>
+       <apex:outputPanel styleClass="myDiv" style="display:none">
+       <div class="mydiv">
+          <table>
+              <tr>
+                  <td style="vertical-align:middle">
+                      <apex:image style="width:20px;" value="{!$Resource.noIcon}"/>
+                  </td>
+                  <td style="vertical-align:middle;color:#DE2121;">
+                      No Available Cases
+                  </td>
+              </tr>
+          </table>
+
+        
+        </div>
+        </apex:outputPanel>
+        <div class="myInfoWrapper">
+            <table style="">
+                <tr>
+                    <td style="width: 20px;">
+                        <apex:image value="{!$Resource.caseIcon}"/>
+                    </td>
+                    <td>
+                        <div class="myInfo"></div>
+                    </td>
+                </tr>
+            </table>
+            <apex:outputPanel id="queueList">
+                <apex:repeat value="{!queueList}" var="queueName">
+                    <div style="padding:5px;border-bottom:1px solid #eee;">
+                        <apex:outputText value="{!queueName}" />
+                        <apex:outputText styleClass="fbookNumber" value="{!queueList[queueName]}" /><br/>
+                    </div>
+                </apex:repeat>
+            </apex:outputPanel>
+        </div >
+
+
+    <div class="responseErrors"></div>
+
+    <apex:form >
+        <apex:actionFunction action="{!getMap}" name="getMap" rerender="queueList"/>
+        <apex:actionFunction immediate="true" name="getCase" action="{!getCase}" rerender="myScript"/>
+        <apex:outputPanel id="myScript">
+                <script type="text/javascript">
+
+                    Visualforce.remoting.timeout = 12000; // Set timeout at page level
+                    
+                    function getCaseId() {
+                        //alert('getting case...');
+                        // This remoting call will use the pages timeout value
+                        //<br/> There are ' + result.CasesAvailable__c + ' cases left in the queue
+                        Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.NextCase.getCaseId}',
+                            function(result,event) {
+                            //alert(result);
+                                if (result == null) {
+                                    $('.myDiv').show();
+                                    $('.myInfoWrapper').hide();
+                                } else {
+                                    if (event.status) {
+                                        getMap();
+                                        //alert('caseId: ' + result.Id + ' number: ' + result.CaseNumber);
+                                        $('.myDiv').hide();
+                                        $('.myInfo').html('Case ' + result.CaseNumber + ' delivered. <br/>');
+                                        $('.myInfoWrapper').show();
+                                        //alert('Case Number ' + result.CaseNumber + ' delivered. There are ' + result.CasesAvailable__c + ' cases left in the queue');
+                                        //alert('Case Id: ' + result.Id);
+                                        resultId = result.Id;
+                                        resultNumber =result.casenumber;
+                                        sforce.console.openPrimaryTab(null,'/' + result.Id, true,result.CaseNumber,primarySuccess, result.CaseNumber);
+                                    } else if (event.type === 'exception') {
+                                        document.getElementsByClassName('responseErrors')[0].innerHTML = event.message;
+                                    }
+                                }
+                                
+                            }
+                        );
+                    }
+                    var primaryTabId;
+                    var resultId;
+                    var resultNumber;
+                    var primarySuccess = function primarySuccess(result) {
+                        //Report whether opening the new tab was successful
+                        primaryTabId = result.id;
+                        if (result.success == true) {
+                            primaryTabId = result.id;
+                        } else {
+                            //alert('there is already a primary tab open with the id: ' + result);
+                            //lets find it...
+                            sforce.console.getPrimaryTabIds(showTabId);
+                            //sforce.console.getEnclosingPrimaryTabId(openSubtab2);
+
+                        }
+                    };
+                    
+                    var openSubtab2 = function(result) {               
+                        sforce.console.openSubtab(result.id , '/' + resultId, true,resultNumber, null, openSuccess, resultNumber);         
+                    };
+
+                    
+                    var showTabId = function showTabId(result) {
+                        //Display the primary tab IDs
+                        //alert('Primary Tab IDs: ' + result.ids);
+                        //alert('Attempting to open sub tab...The case id is: ' + resultId);
+                        for(i=0;i<result.ids.length;i++) {
+                            //if (primaryTabId == result.ids[i]) {
+                                sforce.console.openSubtab(result.ids[i] , '/' + resultId, true,resultNumber, null, openSuccess,  resultNumber);
+                            //}
+                        }
+                    };
+                    
+                    var openSuccess = function openSuccess(result) {
+                        //Report whether opening the new tab was successful
+                        if (result.success == true) {
+                            console.log('sub tab opened successfully');
+                        } else {
+                            console.log('sub tab failed. Case id: ');                       
+                        }
+                    };
+                    
+                
+                </script>
+                <script type="text/javascript">
+                    var eventHandler = function (result) {
+                        if (!result.windowHidden) {
+                            getCaseId();
+                        }
+                    };
+                    sforce.console.onCustomConsoleComponentButtonClicked(eventHandler);
+                    var casePushEventHandler = function (result) {
+                        alert('this is a case push event handler!');
+                    }
+                    
+                    sforce.console.addPushNotificationListener(['Case'], casePushEventHandler);
+                </script>
+
+        </apex:outputPanel>
+    </apex:form>
+    
+
+
+
+    
+</apex:page>

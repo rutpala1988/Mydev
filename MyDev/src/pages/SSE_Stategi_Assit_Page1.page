@@ -1,0 +1,16 @@
+<apex:page controller="MyStrateicAssist1" sidebar="false">
+<style>
+.show
+{
+
+ background-image:url('https://ap1.salesforce.com/servlet/servlet.FileDownload?file={!d1}');
+ width:100%;
+ height:300px
+
+}
+</style>
+<div class="show">
+Testing hello !!!!!!!!!
+</div>
+  
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page standardcontroller="CetificationQA__c" extensions="CertificationExt">
+<apex:form >
+<apex:pageBlock title="Take Test">
+<apex:pageBlockSection >
+Select Exam Type:<apex:selectList value="{!select1}" multiselect="false" size="1">
+<apex:selectOptions value="{!option}"/>
+
+</apex:selectList>
+
+</apex:pageBlockSection>
+
+
+</apex:pageBlock>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,234 @@
+<apex:page sidebar="false" controller="rich.Translate_Controller" >
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<style>
+
+    .object_search_results{
+        list-style:none;
+        margin: 15px 0 0 0;
+        padding: 0 0 0 0;
+    }
+        
+        .object_search_results li{
+            margin:0 0 0 0;
+            padding: 0 0 0 0;
+        }
+        
+        .result_element{
+            margin: 0 -10px 5px -35px;
+            padding: 5px 5px 5px 35px;
+            height:45px;
+            cursor:pointer;
+            
+            
+        }
+        
+        .result_element:hover{
+            opacity:0.9;
+            filter:alpha(opacity=90); /* For IE8 and earlier */
+            background-color:#dbe0e3;
+        }
+        
+        .result_element:active{
+            opacity:0.9;
+            filter:alpha(opacity=90); /* For IE8 and earlier */
+            background-color:#dbe0e3;
+        }
+        
+            .result_image{
+                float:left;
+                
+            }
+            
+            .result_description{
+                margin: 2px 0 0 5px;
+                font-weight:bold;
+            }
+
+
+.right_side_blocks{
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #C7CCCE;
+    padding: 20px 10px 20px 35px;
+}
+
+#translate_block{
+    margin: 5px 0 0 0;
+    
+}
+
+#search_block{
+    margin: 5px 0 0 0;
+    
+}
+
+#search_block label{
+    font-weight:bold;
+}
+
+.wrapper{
+    min-width: 1100px;
+    max-width: 1266px;
+    overflow: auto;
+   
+}
+.left1{
+   position: relative;
+   float: left;
+   left: 0.50%;
+   width: 250px;
+   
+}
+.left2{
+   position: relative;
+   float: left;
+   left: 1.50%;
+   width: 52.00%;
+   
+}
+.right{
+   position: relative;
+   float: right;
+   right: 0.50%;
+   width: 250px;
+   
+}
+
+</style>
+    
+    <apex:pageMessages id="errors" />
+    
+    <div class="wrapper">
+    
+        
+        <!-- Object Details -->
+        
+        <apex:outputPanel id="object_details">
+        <div class="left1">
+            
+                <div style="padding:10px 10px 10px 10px;">
+                       
+                        <apex:outputText style="font-size: 1.5em;color: #222;" id="object_details_1" value="{!search_object.Name}" />
+                    
+                    
+                        <apex:image style="margin: 10px 0 0 0;" id="object_details_2" url="{!search_object.img_url}"/>
+                    
+                </div>
+            
+        </div>
+        </apex:outputPanel>
+        
+        <!-- Chatter Feed -->
+        
+        <div class="left2">
+           
+           <apex:outputPanel id="selected_object_feed">
+               <div id="read_only_text"></div>
+               
+               <chatter:feed entityId="{!selected_object_id}"/>
+               
+               <script>
+                   document.getElementById('publishereditablearea').setAttribute('onkeyup', 'create_ready_only_text()');
+               </script>
+           </apex:outputPanel>
+           
+        </div>
+        
+        <!-- Object Select -->
+        
+        <div class="right">
+            <apex:form >
+            
+            <apex:actionFunction name="search_server" action="{!run_search}" rerender="object_search_block">
+              <apex:param name="object_name" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="show_object" action="{!show_selected_object}" rerender="selected_object_feed, object_details_1, object_details_2">
+              <apex:param name="object_id" value="" />
+              <apex:param name="object_type" value="" />
+            </apex:actionFunction>
+            
+            
+            
+            <h2> Translate: </h2>
+            
+            <div id="translate_block" class="right_side_blocks">
+            
+                <div id="google_translate_element"></div>
+            
+            </div>
+            
+            <h2> Search: </h2>
+            
+            <div id="search_block" class="right_side_blocks">
+                
+                <label> Name </label><br/>
+                            
+                <apex:inputText id="object_name" value="{!object_search}">
+                    <apex:actionSupport event="onkeyup" action="{!run_search}" rerender="object_search_block" status="search_status"/>
+                </apex:inputText>
+                <apex:actionStatus id="search_status" startText="" stopText="">
+                    <apex:facet name="start" >
+                        <img src="{!$Resource.loading_gif}" />
+                    </apex:facet>
+                    <apex:facet name="stop" />
+                </apex:actionStatus>
+                
+                <div class="object_search_results">
+                    <apex:outputPanel id="object_search_block">
+                        <apex:repeat value="{!search_objects}" var="search_object_details" id="group_search_results">
+                            <div  class="result_element" onclick="show_selected_object('{!search_object_details.object_id}','{!search_object_details.object_type}');">
+                                <img class="result_image" width="45" height="45" src="{!search_object_details.img_url}" />
+                                <span class="result_description">
+                                    {!LEFT(search_object_details.name,35)}
+                                </span>
+                                <!-- <br/>
+                                <span class="result_description">
+                                    Title: {!search_object_details.title}
+                                </span> -->
+                                
+                            </div>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </div>
+            
+            </div> 
+                
+            </apex:form>
+        </div>
+        
+    
+    </div>    
+
+    
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false, multilanguagePage: true, gaTrack: true, gaId: 'UA-33877561-1'}, 'google_translate_element');
+        }
+    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <!-- Scripts -->
+    <script type="text/javascript">
+      function search_for_objects() {
+        search_server(document.getElementById("object_name").value);
+      }
+      
+      function show_selected_object(Id,type) {
+        show_object(Id,type);
+      }
+      
+      //document.getElementById('publishereditablearea').setAttribute('onkeyup', 'create_ready_only_text()');
+      
+      function create_ready_only_text(){
+          var chat_text_value = document.getElementById('publishereditablearea').value;
+          document.getElementById('read_only_text').innerHTML = chat_text_value;
+      }
+      
+    </script> 
+    
+</apex:page>

@@ -1,0 +1,70 @@
+<apex:page Controller="PatientData" tabStyle="Contact" showHeader="false" sidebar="false">
+ <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"/>
+    <apex:stylesheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css"/>
+
+
+<script>
+          function highlightElem(elem,pid){
+            $('tr').removeClass('ui-state-highlight');
+            $(elem).addClass('ui-state-highlight');
+            alert(pid);
+            
+            
+            getData(pid);
+        }
+        
+        function getRecord(elem)
+        {
+           $('tr').removeClass('ui-state-highlight');
+            $(elem).addClass('ui-state-highlight');
+        
+        }
+    </script>
+
+<apex:form >
+<apex:pageBlock title="PatientData" id="pdata">
+<apex:pageBlockSection title="Current Patient Information" >
+<apex:image url="https://c.ap1.content.force.com/servlet/servlet.FileDownload?file={!imgid1}" height="100px" width="200px" id="pdata1" >
+</apex:image>
+<apex:pageBlockTable value="{!plist1}" var="list1"  >
+
+<apex:column value="{!list1.FirstName__c}" />
+<apex:column value="{!list1.LastName__c}" />
+<apex:column value="{!list1.ProviderName__r.Name}" />
+
+
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+
+
+
+<apex:pageblockSection title="All Patients Data" >
+
+<apex:pageBlockTable value="{!plist}" var="list"  onRowClick="getRecord(this)">
+
+<apex:column value="{!list.FirstName__c}" onclick="highlightElem(this,'{!list.id}')"/>
+<apex:column value="{!list.LastName__c}" onclick="highlightElem(this,'{!list.id}')"/>
+<apex:column value="{!list.ProviderName__r.Name}" onclick="highlightElem(this,'{!list.id}')"/>
+<apex:column onclick="highlightElem(this,'{!list.id}')">
+<apex:facet name="header">TimeSlot</apex:facet>
+{!list.TimeSlot__c}
+
+
+
+
+
+</apex:column>
+
+</apex:pageBlockTable>
+<apex:actionFunction action="{!getData}" name="getData" reRender="pdata1">
+
+<apex:param name="pid" value=""/>
+
+</apex:actionFunction>
+</apex:pageblockSection>
+
+
+
+</apex:pageBlock>
+</apex:form>  
+</apex:page>

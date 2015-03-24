@@ -1,0 +1,36 @@
+<apex:page >
+<!--    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/> -->
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> -->
+<!--    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> -->
+    <apex:stylesheet value="{!URLFOR($Resource.jqueryCSS, 'jquery-ui-1.8.18.custom.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jqueryJS, 'jquery-1.7.1.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.jqueryJS, 'jquery-ui-1.8.18.custom.min.js')}"/>
+    <style type="text/css">
+        h1, h2, h3, h4, h5, h6 {
+            display: block;
+        }
+    </style>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({
+            collapsible: true,
+            autoHeight: false,
+            navigation: true
+        });
+    });
+    </script>
+    <div id="accordion">
+        <h3><a href="#tab-1"><span>Page 1</span></a></h3>
+        <div id="accordion-1">
+            You can add your code here usually VF pages or markup here
+        </div>
+        <h3><a href="#tab-2"><span>Page 2</span></a></h3>
+        <div id="accordion-2">
+            You can add your code here usually VF pages or markup here
+        </div>
+        <h3><a href="#tab-3"><span>Page 3</span></a></h3>
+        <div id="accordion-3">
+            You can add your code here usually VF pages or markup here
+        </div>
+    </div>
+</apex:page>

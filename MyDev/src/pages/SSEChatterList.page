@@ -1,0 +1,45 @@
+<apex:page controller="SSEChatterList" setup="true">
+
+<apex:sectionHeader title="Configuration"
+      subtitle="Chatter Mailing List"
+      description="Chatter Mailing List allows us to assosiate multiple users with a <strong>Chatter Mailing List Name</strong> and the created Chatter Mailing List Name can be used as a replacement when it comes to @-mentioning multiple users." />
+
+
+    <apex:form >
+    <apex:pageBlock rendered="{!showFlag }">
+        Congratulations !!! New Chatter Mailing List <strong>{!vfMailingListName} </strong> is created.
+    </apex:pageBlock> 
+    <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Create" action="{!SaveList}" />
+        </apex:pageBlockButtons>
+        <!--     --Table--    -->
+           <table> 
+               <tr>
+                   <td><strong>Chatter Mailing List Name</strong></td>
+                   <td><apex:inputText value="{!mailingListName}"/> </td>
+               </tr>
+    
+              <tr>
+                   <td><strong>User</strong></td>
+                   <td><apex:inputText id="membNam" value="{!memName}">
+              
+                     <c:autoComplete autocomplete_textbox="{!$Component.membNam}" objectname="User" />
+                    </apex:inputText>
+                    <apex:commandButton value="Add" Action="{!addUser}"/> </td>
+              </tr>
+        
+                <tr>
+                    <td> <strong>Mailnig List Users</strong></td>
+                    <td><apex:inputtextarea value="{!finalList}" rows="3" cols="60" /> </td>
+                 </tr>
+      </table>
+        
+        
+    
+    </apex:pageBlock>
+        
+       
+        
+    </apex:form>
+</apex:page>

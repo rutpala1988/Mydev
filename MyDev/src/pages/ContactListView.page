@@ -1,0 +1,44 @@
+<apex:page standardcontroller="Contact" extensions="ContactListView">
+
+
+
+  <apex:form >
+  
+    <apex:pageBlock title="Contact List View">
+        
+         <apex:pageBlockTable value="{!Contacts}" var="con">
+         
+             <apex:column headerValue="Action">
+               
+                <apex:commandLink action="{!edit}" value="Edit">
+                    
+                    <apex:param name="id" value="{!con.id}"/>
+                     
+                </apex:commandLink>
+         
+             </apex:column>
+         
+             <apex:column value="{!con.Name}">
+               
+             </apex:column>
+         
+             <apex:column value="{!con.Phone}"/>
+         
+             <apex:column value="{!con.Email}" />
+             
+             <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton,cancelButton" hideOnEdit="editButton"  />
+              
+       </apex:pageBlockTable>
+         <apex:pageBlockButtons > 
+                <apex:commandButton value="Edit" action="{!save}" id="editButton" />
+                <apex:commandButton value="Save" action="{!save}" id="saveButton" />
+                <apex:commandButton value="Cancel" action="{!cancel}" id="cancelButton" />
+         </apex:pageBlockButtons>
+          
+  
+  
+    </apex:pageBlock>
+    
+    </apex:form>
+ 
+</apex:page>

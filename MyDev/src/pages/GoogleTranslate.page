@@ -1,0 +1,8 @@
+<apex:page controller="GoogleTranslator">
+<apex:form >
+<apex:inputText value="{!source}"/>
+<apex:commandButton action="{!getTranslatedText}" value="Translate"/>
+
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page controller="ConnectChatterRestAPI" >
+<script>
+function checkPost()
+{
+alert('hi');
+ doAction();
+
+}
+</script>
+<apex:form >
+<apex:commandButton action="{!createPost}" Value="Post" onComplete="checkPost();"/>
+<apex:actionFunction name="doAction" action="{!doAction}"/>
+</apex:form>
+  
+</apex:page>

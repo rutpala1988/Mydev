@@ -1,0 +1,104 @@
+<!--
+// Copyright 2011, Odhrán Lenaghan - Sales Support Engineering, Salesforce.com Inc.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following
+// conditions are met:
+//
+// - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. 
+// - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+//   disclaimer in the documentation and/or other materials provided with the distribution.
+// - Neither the name of the salesforce.com nor the names of its contributors may be used to endorse or promote products derived
+//   from this software without specific prior written permission. 
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+// INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+// EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<apex:page standardController="Account" extensions="CustomerStructure" >
+    <!-- The tree is rendered by converting a JSON string using the Ext-3.2.2 JavaScript Library and Stylesheet-->
+    <apex:stylesheet value="/EXT/ext-3.2.2/resources/css/ext-all.css"/>
+    <apex:includeScript value="/EXT/ext-3.2.2/ext-debug.js" />
+    <style>
+    <!-- Change the style to highlight which of the node that represents the current page -->
+    .x-tree-node-anchor span strong{
+        color:#aa0000;
+        font-weight:bold;
+        font-size:1.2em;
+    }
+    <!-- Change the font-family and size to look more like SFDC -->
+    .x-tree-node {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+    </style>
+    <script type="text/javascript">
+        Ext.BLANK_IMAGE_URL = '/s.gif';
+        Ext.onReady(function() {
+            <!-- Initialise tree, get JSON string from controller and render to the 'tree-div' div-->
+            var Tree = Ext.tree;
+            var tree = new Tree.TreePanel({
+                renderTo: 'tree-div',
+                useArrows: true,
+                autoScroll: true,
+                animate: true,
+                enableDD: false,
+                border: false,
+                draggable: false,
+                           
+                loader: new Ext.tree.TreeLoader(),
+                id: '{!Id}',
+                listeners: {
+                    <!-- On click of item open url in current window not frame -->
+                    click: function(node, event){
+                        if (node.attributes.url != null)
+                            window.parent.location.href = node.attributes.url;
+                    }
+                                                                  
+                },
+                root: new Ext.tree.AsyncTreeNode({
+                    draggable: false,
+                    allowDrag: false,
+                    allowDrop: false,
+                    children: {!nodeJSON},
+                    <!-- Add an event listener to expand frame that the tree is displayed in using the resizeFrame function -->
+                    listeners: {
+                        expand: function() {
+                            setTimeout(resizeFrame, 1500);
+                        }
+                    }
+                    
+                }),
+                rootVisible: false
+            });
+            tree.getRootNode().expand(true);
+        });
+    
+        <!-- Resizes the frame -->
+        <!-- This function is taken from Matthew Friend's Account Hierarchy Page -->
+        <!-- Copyright (c)2008, Matthew Friend, Sales Engineering, Salesforce.com Inc.  All rights reserved. -->
+                  
+        function resizeFrame() {
+            var x=parent.document.getElementsByTagName("iframe");
+            for (var i = 0;i < x.length;i++){
+                if (x[i].title == "Customer_Hierarchy"){  // Change this to the name of this page
+                    var sframe = parent.document.getElementById(x[i].id); //get id of iframe from parent
+                }
+            }
+            if (navigator.userAgent.indexOf("Firefox/3.0") != -1) { //if Firefox
+                var nHeight = document.body.scrollHeight; //add ten pixels to height of sControl frame
+            } else if (navigator.userAgent.indexOf("Firefox") != -1) { //if Firefox
+                var nHeight = document.body.scrollHeight+10; //add ten pixels to height of sControl frame
+            } else { //otherwise
+                var nHeight = document.body.scrollHeight; //use the returned height of sControl frame
+            }
+            sframe.style.height = nHeight+"px"; //set the frame height to correspond to the content
+        }    
+    </script>
+    <div id="tree-div"></div>
+</apex:page>

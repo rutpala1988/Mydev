@@ -1,0 +1,22 @@
+<apex:page controller="ListSobjects" setup="true">
+<apex:sectionHeader description="This is used to get the List of List of Sobjects and Auto follow them" title="Auto Follow Sobject"  subtitle="Auto Follow Sobject Record"/>
+  
+  <apex:pageBlock >
+  <apex:form >
+  <apex:selectList value="{!opt}" multiselect="false" size="1">
+  
+  <apex:selectOptions value="{!options}" >
+  
+  
+  
+  </apex:selectOptions>
+  
+  </apex:selectList>
+  <apex:commandButton action="{!autoFollow}" value="AutoFollow"/>
+  
+  
+  
+  </apex:form>
+  
+  </apex:pageBlock>
+</apex:page>

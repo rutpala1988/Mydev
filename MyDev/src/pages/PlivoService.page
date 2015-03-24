@@ -1,0 +1,4 @@
+<apex:page controller="SendMessageRestAPI" action="{!sendMessage}">
+{!res}
+ 
+</apex:page>

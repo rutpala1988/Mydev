@@ -1,0 +1,41 @@
+<apex:page controller="QuickCreate">
+<apex:form >
+<apex:pageBlock >
+  <apex:pageBlockSection title="Account Details" columns="2">
+  <apex:inputField value="{!a.Name}"/>
+ 
+  </apex:pageBlockSection>
+  
+  
+  <apex:pageBlockSection title="Contact Details" columns="4">
+  
+  <apex:repeat value="{!conList}" var="list">
+  
+  <apex:inputfield value="{!list.FirstName}"/>
+  <apex:inputField value="{!list.LastName}"/>
+  <apex:inputField value="{!list.Email}"/>
+  <apex:inputField value="{!list.Phone}"/>
+  
+  
+ </apex:repeat> 
+  
+  
+  
+  </apex:pageBlockSection>
+  
+  <apex:pageBlockSection title="Task Details" columns="2">
+  <apex:inputField value="{!t.Subject}"/>
+  <apex:inputField value="{!t.Description}"/>
+  
+ 
+  
+  
+  
+  </apex:pageBlockSection>
+  
+  
+  <apex:commandButton action="{!Submit}" value="Submit"/>
+
+</apex:pageBlock>
+</apex:form>
+</apex:page>

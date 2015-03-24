@@ -1,0 +1,20 @@
+<apex:page standardController="Account" extensions="myextcontroller">
+<apex:form >
+  <apex:pageBlock title="Demonstrate controller extensions">
+  <apex:pageBlockSection >
+  <apex:pageBlockSectionItem >
+  
+{!greetings}
+</apex:pageBlockSectionItem>
+<apex:pageBlockSectionItem >
+<apex:panelGrid columns="2">
+Change Account Name <apex:inputField value="{!account.name}"/>
+</apex:panelGrid>
+</apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton action="{!save}" value="Save"/>
+</apex:pageBlockButtons>
+ </apex:pageBlock>
+  </apex:form>
+</apex:page>

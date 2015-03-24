@@ -1,0 +1,47 @@
+<apex:page standardController="contact">
+ 
+ <style type="text/css">
+ 
+ h1{
+ 
+ font-family:"calibri";
+ font-size:18px;
+ }
+ h2
+ {
+ font-family:"calibri";
+ font-size:15px;
+ }
+ 
+ </style>
+ <apex:pageBlock title="Hello">
+
+ <apex:pageBlocksection >
+ <h1> welcome to my salesforce page
+ youe are viewing {!contact.FirstName} contact
+ </h1>
+ </apex:pageBlockSection>
+ 
+ 
+ <br/><br/>
+
+
+<apex:pageBlockSection >
+ <h2>
+This page is run by the user
+ {!$User.FirstName}
+ 
+</h2>
+ 
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  <apex:form >
+  
+
+<apex:pageMessage severity="info" summary="{!$Label.First_Name}" strength="1" escape="true"></apex:pageMessage>
+<apex:inputField value="{!contact.FirstName}"/>
+<apex:commandButton action="{!save}" value="save new name"/>
+</apex:form>
+
+
+</apex:page>

@@ -1,0 +1,36 @@
+<apex:page controller="MyContactExtension1">
+<apex:form >
+<apex:pageBlock mode="edit">
+
+ <apex:pageBlockSection title="Contact Details" id="block">
+  <apex:pageBlockTable value="{!contact}" var="contactList">
+ <!-- <apex:column value="{!contactList.LastName}" title="LastName">
+  </apex:column>-->
+  <apex:column >
+<apex:facet name="header"> Account Name</apex:facet>
+<apex:commandLink action="{!getAccountPage}" value="{!contactList.Account.Name}">
+<apex:param name="id" value="{!contactList.Account.id}">
+</apex:param>
+</apex:commandLink>
+</apex:column>
+<apex:column >
+<apex:facet name="header"> Contact Name</apex:facet>
+<apex:commandLink action="{!getContactPage}" value="{!contactList.LastName}">
+<apex:param name="id1" value="{!contactList.id}">
+</apex:param>
+</apex:commandLink>
+</apex:column>
+ <apex:column value="{!contactList.Title}"/>
+ 
+ <apex:column value="{!contactList.Phone}"/>
+  
+ </apex:pageBlockTable><br/>
+ 
+<apex:inputText value="{!con}"/><br/>
+ <apex:commandButton value="find" action="{!find}" rerender="block" status="status"/>
+ <apex:actionStatus id="status" startText="loading........."/>
+</apex:pageBlockSection><br/>
+</apex:pageBlock>
+ 
+ </apex:form>
+</apex:page>

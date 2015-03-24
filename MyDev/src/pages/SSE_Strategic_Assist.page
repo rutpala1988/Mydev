@@ -1,0 +1,6 @@
+<apex:page sidebar="false" controller="MyStrategicAssist">
+<apex:form >
+<apex:inputFile value="{!doc1}"/>
+<apex:commandButton action="{!submit}" value="Submit"/>
+</apex:form>
+ </apex:page>

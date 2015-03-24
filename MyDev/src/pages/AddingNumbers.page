@@ -1,0 +1,14 @@
+<apex:page Controller="AddNumbers">
+ <apex:form >
+   
+   <apex:pageBlock >
+      <apex:outputLabel >First Number</apex:outputLabel> <apex:inputText value="{!FirstNumber}"/><br/><br/>
+      <apex:outputLabel >Second Number</apex:outputLabel> <apex:inputText value="{!SecondNumber}"/><br/><br/>
+      <apex:selectList value="{!Operations}"></apex:selectList>
+      <apex:commandButton value="Perform Operation" action="{!add}"/><br/>
+       <apex:outputLabel >Output</apex:outputLabel>&nbsp;&nbsp;<apex:outputText value="{!ThirdNumber}"/>
+     </apex:pageBlock>
+ 
+ </apex:form>
+  
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page Controller="Campaigns">
+  <apex:form >
+     <apex:pageBlock >
+     <apex:pageBlockSection >
+          <apex:pageBlockSectionItem >
+          
+          <apex:selectList value="{!Theater}">
+             <apex:selectOptions value="{!items}">
+             
+             </apex:selectOptions>
+          
+          </apex:selectList>
+          
+          </apex:pageBlockSectionItem>
+         
+     
+     </apex:pageBlockSection>
+     
+   </apex:pageBlock>
+   
+  </apex:form>
+</apex:page>

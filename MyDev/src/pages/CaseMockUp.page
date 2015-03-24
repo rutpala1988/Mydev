@@ -1,0 +1,19 @@
+<apex:page Controller="CaseListController">
+<apex:form >
+<apex:pageBlock mode="edit">
+<apex:pageBlockSection title="Case Details">
+<apex:pageBlockTable value="{!case}" var="CaseList">
+<apex:column value="{!CaseList.CaseNumber}"/>
+<apex:column value="{!CaseList.subject}"/>
+<apex:column value="{!CaseList.Status}"/>
+
+
+</apex:pageBlockTable><br/>
+
+<apex:commandButton value="Save" action="{!save}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+
+</apex:page>

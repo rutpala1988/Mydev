@@ -1,0 +1,26 @@
+<apex:page StandardController="Opportunity" extensions="MapContactList">
+<apex:form >
+<apex:pageBlock title="Contact2Team">
+
+<apex:pageBlockSection columns="1"> 
+
+<apex:pageBlockTable value="{!cList}" var="c">
+
+<apex:column value="{!c.Contact.Name}"/>
+<apex:column value="{!c.Contact.Account.Name}"/>
+<apex:column value="{!c.Contact.Email}"/>
+<apex:column value="{!c.Contact.Phone}"/>
+<apex:column headerValue="TeamMember">
+<apex:selectList value="{!opt1}" size="1" multiselect="false">
+<apex:selectOptions value="{!options1}" />
+</apex:selectList>
+</apex:column>
+
+</apex:pageBlockTable>
+<apex:commandButton action="{!doSave}" value="Save"/>
+
+
+</apex:pageBlockSection>
+</apex:pageBlock>
+  </apex:form>
+</apex:page>
